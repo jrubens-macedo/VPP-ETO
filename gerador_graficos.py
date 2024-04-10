@@ -6,7 +6,7 @@ from datetime import datetime
 
 ######################################################################################
 # Especificando o dia específico que você deseja plotar
-dia_especifico = '2024-04-09'
+dia_especifico = '2024-04-07'
 ######################################################################################
 
 
