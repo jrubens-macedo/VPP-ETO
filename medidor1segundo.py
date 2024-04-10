@@ -3,6 +3,11 @@ import time
 from datetime import datetime
 import math
 
+# Variável de controle para verificar se o cabeçalho já foi impresso
+cabecalho_arquivo = False
+
+print ("Data/Hora; Va(V); Vb(V); Vc(V); Ia(A); Ib(A); Ic(A); Pa(kW); Pb(kW); Pc(kW); Qa(kvar); Qb(kvar); Qc(kvar); Sa(kVA); Sb(kVA); Sc(kVA); Ptotal(kW); Qtotal(kvar); Stotal(kVA)")
+
 while True:
     response = requests.get('https://www.pqsys.com.br/remoteScreen/pq99_6169d4ee0ba83243d39fa0cc/api/fasor')
     data = response.json()
@@ -81,6 +86,10 @@ while True:
 
     # Abre o arquivo em modo de anexação e escreve a linha
     with open('dados_registrados.txt', 'a') as arquivo:
+        # Verifica se o cabeçalho já foi impresso, caso contrário, imprime e define a variável de controle como True
+        if not cabecalho_arquivo:
+            arquivo.write(cabecalho_para_salvar)
+            cabecalho_arquivo = True
         arquivo.write(linha_para_salvar)
 
     print(linha_para_salvar, end='')
